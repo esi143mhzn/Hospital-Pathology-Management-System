@@ -1,6 +1,9 @@
 import express from 'express';
 import dotenv from "dotenv";
+import cors from "cors";
 import pool from "./config/db.js";
+import userRoutes from "./routes/userRoutes.js";
+import errorHandling from './middlewares/errorHandler.js';
 import createUserTable from './data/createUserTable.js';
 
 dotenv.config();
@@ -9,10 +12,14 @@ const app = express();
 const port = process.env.PORT || 5001;
 
 // Middlewares
+app.use(express.json());
+app.use(cors());
 
 // Routes
+app.use("/api/user", userRoutes);
 
 // Error Handling Middlewares
+app.use(errorHandling);
 
 // Create user table before starting server
 createUserTable();
