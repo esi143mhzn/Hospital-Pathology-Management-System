@@ -18,12 +18,12 @@ const UserModel = {
     },
 
     async getUsersById(id) {
-        const result = await pool.query("SELECT * FROM users WHERE id = $1", id);
+        const result = await pool.query("SELECT * FROM users WHERE id = $1", [id]);
         return result.rows[0];
     },
 
-    async updateUsers(id) {
-        const result = await pool.query("UPDATE users SET name=$1, email=$2 WHERE id=$3 RETURNING *", [name, email, id]);
+    async updateUsers(id, { name, email, role, password }) {
+        const result = await pool.query("UPDATE users SET name = $1, email = $2, role=$3, password=$4 WHERE id = $5 RETURNING *", [name, email, role, password, id]);
         return result.rows[0];
     },
 

@@ -63,8 +63,9 @@ export const getAllUsers = async (req, res, next) => {
 
 export const getUserById = async (req, res, next) => {
     try {
-        const user = await getUsersByIdService(res.params.id);
-        if(!users) return handleResponse(res, 404, "User not found!", user);
+        const { id } = req.params;
+        const user = await UserModel.getUsersById(id);
+        if(!user) return handleResponse(res, 404, "User not found!", user);
         handleResponse(res, 200, "User fetched successfully!", user);
     } catch (err) {
         next(err);
@@ -72,10 +73,17 @@ export const getUserById = async (req, res, next) => {
 };
 
 export const updateUser = async (req, res, next) => {
-    const { name, email } = req.body;
+    const {id} = req.params;
+    const {name, email, role, password } = req.body;
     try {
-        const updatedUser = await updateUsersService(res.params.id, name, email);
-        if(!users) return handleResponse(res, 404, "User not found!", updatedUser);
+        const existingUser = await UserModel.getUsersById(id);
+        if (!existingUser) return handleResponse(res, 400, "User not found!");
+
+        let hashedPassword;
+        password ? hashedPassword = await bcrypt.hash(password, 10) : hashedPassword = existingUser.password
+        
+        const updatedUser = await UserModel.updateUsers(id, { name, email, role, password: hashedPassword});
+        if(!updatedUser) return handleResponse(res, 404, "User not found!", updatedUser);
         handleResponse(res, 200, "User updated successfully!", updatedUser);
     } catch (err) {
         next(err);
@@ -84,8 +92,8 @@ export const updateUser = async (req, res, next) => {
 
 export const deleteUser = async (req, res, next) => {
     try {
-        const deletedUser = await deleteUsersService(res.params.id);
-        if(!users) return handleResponse(res, 404, "User not found!", deletedUser);
+        const deletedUser = await UserModel.deleteUsers(req.params.id);
+        if(!deletedUser) return handleResponse(res, 404, "User not found!", deletedUser);
         handleResponse(res, 200, "User deleted successfully!", deletedUser);
     } catch (err) {
         next(err);

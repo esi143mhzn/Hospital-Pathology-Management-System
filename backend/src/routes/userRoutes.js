@@ -7,8 +7,8 @@ const router = express.Router();
 router.post("/create", createUser);
 router.post("/login", loginUser);
 router.get("/", verifyToken, authorizeRoles("admin"), getAllUsers);
-router.get("/user/:id", getUserById);
-router.put("/user/:id", updateUser);
-router.delete("/user/:id", deleteUser);
+router.get("/:id", getUserById);
+router.put("/:id", updateUser);
+router.delete("/:id", deleteUser);
 
 export default router;
