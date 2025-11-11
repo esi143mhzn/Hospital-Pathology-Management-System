@@ -5,6 +5,8 @@ import pool from "./config/db.js";
 import userRoutes from "./routes/userRoutes.js";
 import errorHandling from './middlewares/errorHandler.js';
 import createUserTable from './data/createUserTable.js';
+import createPatientTable from './data/createPatientTable.js';
+import patientRoutes from "./routes/patientRoutes.js";
 
 dotenv.config();
 
@@ -17,12 +19,14 @@ app.use(cors());
 
 // Routes
 app.use("/api/user", userRoutes);
+app.use("/api/patient", patientRoutes);
 
 // Error Handling Middlewares
 app.use(errorHandling);
 
 // Create user table before starting server
 createUserTable();
+createPatientTable();
 
 // Testing POSTGRES Connection
 app.get("/", async (req, res) => {
