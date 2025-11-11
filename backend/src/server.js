@@ -13,7 +13,8 @@ import createTestSubCategoryTable from './data/createTestSubCategoryTable.js';
 import createTestTable from './data/createTestTable.js';
 import testMainCategoryRoutes from './routes/testMainCategoryRoutes.js';
 import testCategoryRoutes from './routes/testCategoryRoutes.js';
-import testSubCategoryRoutes from './routes/testSubcategoryRoute.js';
+import testSubCategoryRoutes from './routes/testSubcategoryRoutes.js';
+import testRoutes from './routes/testRoutes.js';
 
 dotenv.config();
 
@@ -30,6 +31,7 @@ app.use("/api/patient", patientRoutes);
 app.use("/api/main-category", testMainCategoryRoutes);
 app.use("/api/category", testCategoryRoutes);
 app.use("/api/sub-category", testSubCategoryRoutes);
+app.use("/api/test", testRoutes);
 
 // Error Handling Middlewares
 app.use(errorHandling);

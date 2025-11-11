@@ -11,20 +11,20 @@ const TestModel = {
         return result.rows[0];
     },
 
-    async getChildren(parentId) {
-        const result = await pool.query("SELECT * FROM tests WHERE parent_id = $1", [parentId]);
-        return result.rows;
-    },
-
-    async create({ name, parent_id = null, level = 1, unit, reference_range, price }) {
-        const result = await pool.query("INSERT INTO tests (name, parent_id, level, unit, reference_range, price) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *", [name, parent_id, level, unit, reference_range, price]);
+    async create({ name, subcategory_id, unit, reference_range }) {
+        const result = await pool.query("INSERT INTO tests (name, subcategory_id, unit, reference_range) VALUES ($1, $2, $3, $4) RETURNING *", [name, subcategory_id, unit, reference_range]);
         return result.rows[0];
     },
 
-     async update(id, {name, parent_id, level, unit, reference_range, price}) {
-        const result = await pool.query("UPDATE tests SET name = $1, parent_id = $2, level = $3, unit = $4, reference_range = $5, price = $6 WHERE id = $7 RETURNING *", [name, parent_id, level, unit, reference_range, price, id]);
+     async update(id, {name, subcategory_id, unit, reference_range}) {
+        const result = await pool.query("UPDATE tests SET name = $1, subcategory_id = $2, unit = $3, reference_range = $4 WHERE id = $5 RETURNING *", [name, subcategory_id, unit, reference_range, id]);
         return result.rows[0];
-     }
+    },
+
+    async delete(id) {
+        const result = await pool.query("DELETE FROM tests RETURNING *", [id]);
+        return result.rows[0];
+    }
 }
 
 export default TestModel;
