@@ -7,6 +7,12 @@ import errorHandling from './middlewares/errorHandler.js';
 import createUserTable from './data/createUserTable.js';
 import createPatientTable from './data/createPatientTable.js';
 import patientRoutes from "./routes/patientRoutes.js";
+import createTestMainCategoryTable from './data/createTestMainCategoryTable.js';
+import createTestCategoryTable from './data/createTestCategoryTable.js';
+import createTestSubCategoryTable from './data/createTestSubCategoryTable.js';
+import createTestTable from './data/createTestTable.js';
+import testRoutes from "./routes/testRoutes.js";
+import testMainCategoryRoutes from './routes/testMainCategoryRoutes.js';
 
 dotenv.config();
 
@@ -20,6 +26,7 @@ app.use(cors());
 // Routes
 app.use("/api/user", userRoutes);
 app.use("/api/patient", patientRoutes);
+app.use("/api/main-category", testMainCategoryRoutes);
 
 // Error Handling Middlewares
 app.use(errorHandling);
@@ -27,6 +34,10 @@ app.use(errorHandling);
 // Create user table before starting server
 createUserTable();
 createPatientTable();
+createTestMainCategoryTable();
+createTestCategoryTable();
+createTestSubCategoryTable();
+createTestTable();
 
 // Testing POSTGRES Connection
 app.get("/", async (req, res) => {
