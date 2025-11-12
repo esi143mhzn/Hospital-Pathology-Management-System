@@ -9,6 +9,8 @@ const Login = () => {
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const navigate = useNavigate();
+    const query = new URLSearchParams(location.search);
+    const sessionExpired = query.get("sessionExpired");
 
     const handleSubmit = async (e) => {
       e.preventDefault();
@@ -27,6 +29,11 @@ const Login = () => {
       <div className='bg-white shadow-lg rounded-2xl p-8 w-full max-w-md'>
         <h1 className='text-2xl font-bold text-center text-gray-800 mb-6'>Hospital Pathology Management System</h1>
         <h2 className='text-lg font-semibold text-gray-700 text-center mb-6'>Login to your account</h2>
+        {sessionExpired && (
+          <p style={{ color: "red", marginBottom: "1rem" }}>
+            Your session has expired. Please login again.
+          </p>
+        )}
         {error && (
           <p className="text-red-500 bg-red-100 p-2 text-center rounded mb-4">
             {error}
