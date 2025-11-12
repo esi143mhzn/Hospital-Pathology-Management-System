@@ -34,12 +34,12 @@ const Login = () => {
         )}
         <form onSubmit={handleSubmit} className='space-y-5'>
           <div className='block text-gray-700 mb-1'>
-            <label htmlFor="">Email</label>
-            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none' required/>
+            <label htmlFor="email">Email</label>
+            <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none' autoComplete='email' required/>
           </div>
           <div className='block text-gray-700 mb-1'>
-            <label htmlFor="">Password</label>
-            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none' required/>
+            <label htmlFor="password">Password</label>
+            <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} className='w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none' required/>
           </div>
           <button className='bg-blue-600 py-3 w-full hover:bg-blue-700 text-white rounded-md font-semibold transition'>Login</button>
         </form>

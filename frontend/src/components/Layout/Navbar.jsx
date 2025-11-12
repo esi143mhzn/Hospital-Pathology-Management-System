@@ -1,21 +1,23 @@
 import React, { useContext } from 'react'
-import { AuthContext } from '../context/AuthContext'
-import { useLocation } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext'
+import { matchPath, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
     const location = useLocation();
     const { user, logout } = useContext(AuthContext);
     if(!user) return null;
 
-    const title = {
-        "/": "Dashboard",
-        "/patients": "Patients",
-        "/tests": "Tests",
-        "/billing": "Billing",
-        "/reports": "Reports",
-        "/user": "Users",
-        "/settings": "Settings",
-    }[location.pathname] || "Dashboard";
+    const routesMap = [
+        { path: "/", label: "Dashboard"},
+        { path: "/patients/*", label: "Patients"},
+        { path: "/tests/*", label: "Tests"},
+        { path: "/billing/*", label: "Billing"},
+        { path: "/reports/*", label: "Reports"},
+        { path: "/user/*", label: "Users"},
+        { path: "/settings/*", label: "Settings"},
+    ];
+
+    const title = routesMap.find((r) => matchPath(r.path, location.pathname)) ?.label || "Dashboard";
 
   return (
     <header className='bg-white shadow p-4 flex justify-between items-center'>

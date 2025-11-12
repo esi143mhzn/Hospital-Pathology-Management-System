@@ -2,12 +2,15 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import Login from "./pages/Login";
 import { AuthProvider } from "./context/AuthContext";
-import Users from "./pages/Users";
 import Register from "./pages/Register";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/Layout/Navbar";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Dashboard from "./pages/Dashboard";
-import Sidebar from "./components/Sidebar";
+import Sidebar from "./components/Layout/Sidebar";
+import UsersList from "./pages/Users/UsersList";
+import UserCreate from "./pages/Users/UsersCreate";
+import UserEdit from "./pages/Users/UsersEdit";
+import { NotificationProvider } from "./context/NotificationContext";
 
 const LayoutWrapper = () => {
   const location = useLocation();
@@ -19,19 +22,23 @@ const LayoutWrapper = () => {
       <div className={`flex-1 ${!hideLayout ? "md:ml-64" : ""}`}>
         {!hideLayout && <Navbar />}
 
-        <main className="p-4">
-          <Routes>
-            {/* Public routes */}
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
+        <NotificationProvider>
+          <main className="p-4">
+            <Routes>
+              {/* Public routes */}
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
 
-            {/* Protected routes */}
-            <Route element={<ProtectedRoute />}>
-              <Route path="/" element={<Dashboard />} />
-              <Route path="/user" element={<Users />} />
-            </Route>
-          </Routes>
-        </main>
+              {/* Protected routes */}
+              <Route element={<ProtectedRoute />}>
+                <Route path="/" element={<Dashboard />} />
+                <Route path="/user" element={<UsersList />} />
+                <Route path="/user/create" element={<UserCreate />} />
+                <Route path="/user/:id" element={<UserEdit />} />
+              </Route>
+            </Routes>
+          </main>
+        </NotificationProvider>
       </div>
     </div>
   );
