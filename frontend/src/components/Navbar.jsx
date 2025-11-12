@@ -1,30 +1,33 @@
 import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
 import { AuthContext } from '../context/AuthContext'
+import { useLocation } from 'react-router-dom';
 
 const Navbar = () => {
+    const location = useLocation();
     const { user, logout } = useContext(AuthContext);
     if(!user) return null;
 
-  return (
-    <nav className='flex justify-between p-4 bg-blue-200'>
-        <div>
-            <Link to="/" className='mr-4'>Dashboard</Link>
-            {(user.data.role === "admin" || user.data.role === "doctor") && <Link to="/user" className='mr-4'>Users</Link>}
-            
-        </div>
+    const title = {
+        "/": "Dashboard",
+        "/patients": "Patients",
+        "/tests": "Tests",
+        "/billing": "Billing",
+        "/reports": "Reports",
+        "/user": "Users",
+        "/settings": "Settings",
+    }[location.pathname] || "Dashboard";
 
-        {user ? (
-            <div className='flex items-center gap-4'>
-                 <span className='font-semibold'>Hello, {user.data?.name}</span>
-                 <button onClick={logout} className='bg-red-200 px-3 py-1 rounded hover:cursor-pointer hover:bg-red-300 transition duration-200'>Logout</button>
+  return (
+    <header className='bg-white shadow p-4 flex justify-between items-center'>
+        <h2 className='text-xl font-semibold'>{title}</h2>
+        <div className='flex items-center gap-4'>
+            <span className='text-gray-600'>Welcome, {user.data?.name}</span>
+            <div className="flex items-center gap-2">
+                <button onClick={logout} className='bg-red-200 px-3 py-1 rounded hover:cursor-pointer hover:bg-red-300 transition duration-200'>Logout</button>
             </div>
-        ) : (
-            <Link to="/login">Login</Link>
-        )
-        }
-    </nav>
-  )
+        </div>
+    </header>
+  ) 
 }
 
 export default Navbar
