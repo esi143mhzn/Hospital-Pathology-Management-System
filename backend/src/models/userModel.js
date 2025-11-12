@@ -13,7 +13,7 @@ const UserModel = {
     },
 
     async getUsers() {
-        const result = await pool.query("SELECT * FROM users");
+        const result = await pool.query("SELECT * FROM users ORDER BY created_at ASC");
         return result.rows;
     },
 

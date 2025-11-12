@@ -79,6 +79,13 @@ export const updateUser = async (req, res, next) => {
         const existingUser = await UserModel.getUsersById(id);
         if (!existingUser) return handleResponse(res, 400, "User not found!");
 
+        if (email) {
+            const userWithSameEmail = await UserModel.findByEmail(email);
+            if (userWithSameEmail && userWithSameEmail.id !== parseInt(id)) {
+                return handleResponse(res, 400, "Email already exists!");
+            }
+        }
+
         let hashedPassword;
         password ? hashedPassword = await bcrypt.hash(password, 10) : hashedPassword = existingUser.password
         
