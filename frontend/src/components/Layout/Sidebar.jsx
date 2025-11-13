@@ -6,7 +6,7 @@ const Sidebar = () => {
 
     const menuItems = [
         { name: "Dashboard", path: "/" },
-        { name: "Patients", path: "/patients" },
+        { name: "Patients", path: "/patient" },
         { name: "Tests", path: "/tests" },
         { name: "Billing", path: "/billing" },
         { name: "Reports", path: "/reports" },

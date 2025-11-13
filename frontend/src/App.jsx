@@ -11,6 +11,9 @@ import UsersList from "./pages/Users/UsersList";
 import UserCreate from "./pages/Users/UsersCreate";
 import UserEdit from "./pages/Users/UsersEdit";
 import { NotificationProvider } from "./context/NotificationContext";
+import PatientsList from "./pages/Patients/PatientsList";
+import PatientCreate from "./pages/Patients/PatientsCreate";
+import PatientEdit from "./pages/Patients/PatientsEdit";
 
 const LayoutWrapper = () => {
   const location = useLocation();
@@ -32,9 +35,15 @@ const LayoutWrapper = () => {
               {/* Protected routes */}
               <Route element={<ProtectedRoute />}>
                 <Route path="/" element={<Dashboard />} />
+
+                <Route path="/patient" element={<PatientsList />} />
+                <Route path="/patient/create" element={<PatientCreate />} />
+                <Route path="/patient/:id" element={<PatientEdit />} />
+
                 <Route path="/user" element={<UsersList />} />
                 <Route path="/user/create" element={<UserCreate />} />
                 <Route path="/user/:id" element={<UserEdit />} />
+                
               </Route>
             </Routes>
           </main>

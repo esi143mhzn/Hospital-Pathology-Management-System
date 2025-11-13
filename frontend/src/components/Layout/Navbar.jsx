@@ -9,7 +9,7 @@ const Navbar = () => {
 
     const routesMap = [
         { path: "/", label: "Dashboard"},
-        { path: "/patients/*", label: "Patients"},
+        { path: "/patient/*", label: "Patients"},
         { path: "/tests/*", label: "Tests"},
         { path: "/billing/*", label: "Billing"},
         { path: "/reports/*", label: "Reports"},
