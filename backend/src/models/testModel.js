@@ -22,7 +22,7 @@ const TestModel = {
     },
 
     async delete(id) {
-        const result = await pool.query("DELETE FROM tests RETURNING *", [id]);
+        const result = await pool.query("DELETE FROM tests WHERE id = $1 RETURNING *", [id]);
         return result.rows[0];
     }
 }
