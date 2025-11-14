@@ -11,7 +11,12 @@ const handleResponse = (res, status, message, data = null) => {
 
 export const createPatient = async (req, res, next) => {
     try {
-        const newPatient = await PatientModel.create(req.body);
+        const user_id = req.user?.id;
+        const patientData = {
+            ...req.body,
+            user_id,
+        };
+        const newPatient = await PatientModel.create(patientData);
         handleResponse(res, 201, "Patient created successfully!", newPatient);
     } catch (err) {
         next(err);
