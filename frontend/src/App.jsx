@@ -14,6 +14,10 @@ import { NotificationProvider } from "./context/NotificationContext";
 import PatientsList from "./pages/Patients/PatientsList";
 import PatientCreate from "./pages/Patients/PatientsCreate";
 import PatientEdit from "./pages/Patients/PatientsEdit";
+import TestMainCategory from "./pages/Tests/TestMainCategory";
+import TestCategory from "./pages/Tests/TestCategory";
+import TestSubCategory from "./pages/Tests/TestSubCategory";
+import Test from "./pages/Tests/Test";
 
 const LayoutWrapper = () => {
   const location = useLocation();
@@ -43,7 +47,11 @@ const LayoutWrapper = () => {
                 <Route path="/user" element={<UsersList />} />
                 <Route path="/user/create" element={<UserCreate />} />
                 <Route path="/user/:id" element={<UserEdit />} />
-                
+                <Route path="/tests/main-category" element={<TestMainCategory />} />
+                <Route path="tests/category" element={<TestCategory />}/>
+                <Route path="tests/sub-category" element={<TestSubCategory />}/>
+                <Route path="tests" element={<Test />}/>
+
               </Route>
             </Routes>
           </main>

@@ -59,9 +59,9 @@ const UsersList = () => {
             </tr>
           </thead>
           <tbody>
-            {users.map((user) => (
+            {users.map((user, index) => (
               <tr key={user.id} className='text-center'>
-                <td className='py-2 px-4 border'>{user.id}</td>
+                <td className='py-2 px-4 border'>{index + 1}</td>
                 <td className='py-2 px-4 border'>{user.name}</td>
                 <td className='py-2 px-4 border'>{user.email}</td>
                 <td className='py-2 px-4 border'>{user.role}</td>
