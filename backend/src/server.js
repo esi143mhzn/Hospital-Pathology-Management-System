@@ -36,16 +36,16 @@ app.use("/api/test", testRoutes);
 // Error Handling Middlewares
 app.use(errorHandling);
 
-// Create user table before starting server
-createUserTable();
-createPatientTable();
-createTestMainCategoryTable();
-createTestCategoryTable();
-createTestSubCategoryTable();
-createTestTable();
-
 // Testing POSTGRES Connection
 app.get("/", async (req, res) => {
+    // Create user table before starting server
+    await createUserTable();
+    await createPatientTable();
+    await createTestMainCategoryTable();
+    await createTestCategoryTable();
+    await createTestSubCategoryTable();
+    await createTestTable();
+
     const result = await pool.query("SELECT current_database()");
     res.send(`The database name is: ${result.rows[0].current_database}`);
 })

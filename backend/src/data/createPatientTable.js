@@ -16,7 +16,7 @@ const createPatientTable = async () => {
     `;    
 
     try {
-        pool.query(queryText);
+        await pool.query(queryText);
         console.log("Patient table created if not exists");
     } catch (error) {
         console.log("Error creating patients table: ", error);

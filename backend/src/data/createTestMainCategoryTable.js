@@ -11,7 +11,7 @@ const createTestMainCategoryTable = async() => {
     `;
 
     try {
-        pool.query(queryText);
+        await pool.query(queryText);
         console.log("TestMainCategory table created if not exists");
     } catch (error) {
         console.log("Error creating TestMainCategory table: ", error);

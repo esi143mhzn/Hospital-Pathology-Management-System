@@ -14,7 +14,7 @@ const createTestTable = async() => {
     `;
 
     try {
-        pool.query(queryText);
+        await pool.query(queryText);
         console.log("Test table created if not exists");
     } catch (error) {
         console.log("Error creating Test table: ", error);
