@@ -39,19 +39,22 @@ const LayoutWrapper = () => {
               {/* Protected routes */}
               <Route element={<ProtectedRoute />}>
                 <Route path="/" element={<Dashboard />} />
-
                 <Route path="/patient" element={<PatientsList />} />
                 <Route path="/patient/create" element={<PatientCreate />} />
                 <Route path="/patient/:id" element={<PatientEdit />} />
+              </Route>
 
-                <Route path="/user" element={<UsersList />} />
-                <Route path="/user/create" element={<UserCreate />} />
-                <Route path="/user/:id" element={<UserEdit />} />
+              <Route element={<ProtectedRoute allowedRoles={['lab']} />}>
                 <Route path="/tests/main-category" element={<TestMainCategory />} />
                 <Route path="tests/category" element={<TestCategory />}/>
                 <Route path="tests/sub-category" element={<TestSubCategory />}/>
                 <Route path="tests" element={<Test />}/>
+              </Route>
 
+              <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
+                <Route path="/user" element={<UsersList />} />
+                <Route path="/user/create" element={<UserCreate />} />
+                <Route path="/user/:id" element={<UserEdit />} />
               </Route>
             </Routes>
           </main>

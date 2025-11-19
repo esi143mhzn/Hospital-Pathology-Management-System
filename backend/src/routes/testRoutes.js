@@ -4,7 +4,7 @@ import { createTest, deleteTest, getTestById, getTests, updateTest } from "../co
 
 const router = express.Router();
 
-// router.use(verifyToken);
+router.use(verifyToken);
 router.post("/create", createTest);
 router.get("/", getTests);
 router.get("/:id", getTestById);
