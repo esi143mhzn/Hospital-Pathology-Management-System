@@ -6,7 +6,6 @@ const Sidebar = () => {
     const [open, setOpen] = useState(false);
     const [testOpen, setTestOpen] = useState(false);
     const { user } = useContext(AuthContext);
-    console.log(user.data.role)
 
     const location = useLocation();
     const menuItems = [
@@ -47,7 +46,7 @@ const Sidebar = () => {
                 <nav>
                     <ul className='space-y-3'>
                         {menuItems.map(item => {
-                            if (!item.roles.includes(user.data?.role)) return null; // skip unauthorized
+                            if (!item.roles.includes(user?.data.role)) return null; // skip unauthorized
 
                             // Render dropdown or normal link
                             if (item.subMenus) {
@@ -63,7 +62,7 @@ const Sidebar = () => {
 
                                         <div className={`ml-3 overflow-hidden transition-all duration-300 ${testOpen ? "max-h-80" : "max-h-0"}`}>
                                             {item.subMenus.map(sub => {
-                                                if (!sub.roles.includes(user.data?.role)) return null;
+                                                if (!sub.roles.includes(user?.data.role)) return null;
                                                 return (
                                                     <NavLink
                                                         key={sub.name}
