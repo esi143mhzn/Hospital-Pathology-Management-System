@@ -19,7 +19,7 @@ const Sidebar = () => {
                 { name: "Main Category", path: "/tests/main-category", roles: ["lab"] },
                 { name: "Category", path: "/tests/category", roles: ["lab"] },
                 { name: "Subcategory", path: "/tests/sub-category", roles: ["lab"] },
-                { name: "Tests", path: "/tests", roles: ["lab"] },
+                { name: "Tests", path: "/tests/list", roles: ["lab"] },
             ]
         },
         { name: "Billing", path: "/billing", roles: ["admin", "doctor"] },
@@ -85,7 +85,7 @@ const Sidebar = () => {
                                 <li key={item.name}>
                                     <NavLink
                                         to={item.path}
-                                        onClick={() => setOpen(false)}
+                                        onClick={() => {setTestOpen(false); setOpen(false)}}
                                         className={({ isActive }) =>
                                             `block px-3 py-2 rounded-md transition ${isActive ? "bg-blue-600" : "hover:bg-gray-700"}`
                                         }

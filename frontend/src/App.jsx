@@ -48,7 +48,7 @@ const LayoutWrapper = () => {
                 <Route path="/tests/main-category" element={<TestMainCategory />} />
                 <Route path="tests/category" element={<TestCategory />}/>
                 <Route path="tests/sub-category" element={<TestSubCategory />}/>
-                <Route path="tests" element={<Test />}/>
+                <Route path="tests/list" element={<Test />}/>
               </Route>
 
               <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
