@@ -15,6 +15,9 @@ import testMainCategoryRoutes from './routes/testMainCategoryRoutes.js';
 import testCategoryRoutes from './routes/testCategoryRoutes.js';
 import testSubCategoryRoutes from './routes/testSubcategoryRoutes.js';
 import testRoutes from './routes/testRoutes.js';
+import CreateBillTable from './data/createBillTable.js';
+import CreateBillItemTable from './data/createBillItemTable.js';
+import billRoutes from './routes/billRoutes.js';
 
 dotenv.config();
 
@@ -32,6 +35,7 @@ app.use("/api/main-category", testMainCategoryRoutes);
 app.use("/api/category", testCategoryRoutes);
 app.use("/api/sub-category", testSubCategoryRoutes);
 app.use("/api/test", testRoutes);
+app.use("/api/billing", billRoutes);
 
 // Error Handling Middlewares
 app.use(errorHandling);
@@ -45,6 +49,8 @@ app.get("/", async (req, res) => {
     await createTestCategoryTable();
     await createTestSubCategoryTable();
     await createTestTable();
+    await CreateBillTable();
+    await CreateBillItemTable();
 
     const result = await pool.query("SELECT current_database()");
     res.send(`The database name is: ${result.rows[0].current_database}`);

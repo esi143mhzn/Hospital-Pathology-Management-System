@@ -18,6 +18,9 @@ import TestMainCategory from "./pages/Tests/TestMainCategory";
 import TestCategory from "./pages/Tests/TestCategory";
 import TestSubCategory from "./pages/Tests/TestSubCategory";
 import Test from "./pages/Tests/Test";
+import BillingCreate from "./pages/Billing/BillingCreate";
+import BillingList from "./pages/Billing/BillingList";
+import BillingEdit from "./pages/Billing/BillingEdit";
 
 const LayoutWrapper = () => {
   const location = useLocation();
@@ -42,6 +45,9 @@ const LayoutWrapper = () => {
                 <Route path="/patient" element={<PatientsList />} />
                 <Route path="/patient/create" element={<PatientCreate />} />
                 <Route path="/patient/:id" element={<PatientEdit />} />
+                <Route path="/billing/create" element={<BillingCreate />} />
+                <Route path="/billing/" element={<BillingList />} />
+                <Route path="/billing/:id" element={<BillingEdit />} />
               </Route>
 
               <Route element={<ProtectedRoute allowedRoles={['lab']} />}>
